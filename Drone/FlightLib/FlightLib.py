@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# imports
 from __future__ import print_function
 import math
 import sys
@@ -31,8 +30,6 @@ x_current = 0
 y_current = 0
 z_current = 0
 
-
-# functions
 
 # noinspection PyCompatibility
 def safety_check(confirm=True):
@@ -67,8 +64,14 @@ def capture_position(frame_id='aruco_map'):
 
 def navto(x, y, z, yaw=float('nan'), speed=1.0, frame_id='aruco_map'):
     navigate(frame_id=frame_id, x=x, y=y, z=z, yaw=yaw, speed=speed)
-    print('Going to... | x: ', '{:.3f}'.format(x), ' y: ', '{:.3f}'.format(y), ' z: ', '{:.3f}'.format(z), ' yaw: ',
-          '{:.3f}'.format(yaw), sep='')
+    print(
+        'Going to... | '
+        'x: {:.3f} '
+        'y: {:.3f} '
+        'z: {:.3f} '
+        'yaw: {:.3f}'.format(
+            x, y, z, yaw
+        ))
     return True
 
 

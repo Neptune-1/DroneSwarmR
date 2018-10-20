@@ -8,7 +8,7 @@ from bpy.props import StringProperty, BoolProperty, FloatProperty
 
 bl_info = {
     "name": "Export > Drone Swarm animation Export(.csv)",
-    "author": "Richard Bartlett, MCampagnini",
+    "author": "Dmitry Shorokhov",
     "version": (2, 5, 1),
     "blender": (2, 6, 3),
     "api": 36079,
@@ -97,6 +97,7 @@ def save_chan(context, folder_path):
                 if len(obj.data.materials) == 1:
                     material = obj.data.materials[0]
                 else:
+                    # TODO: choose material by name
                     material = obj.data.materials[0]
                 print(dir(material))
                 scene.frame_set(frame)
