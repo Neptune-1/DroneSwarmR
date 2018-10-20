@@ -1,10 +1,7 @@
 import socket
 
 
-
 class Client(object):
-
-
     def __init__(self, copter_id, HOST='localhost', PORT=8002):
         self.PORT = PORT
         self.HOST = HOST
