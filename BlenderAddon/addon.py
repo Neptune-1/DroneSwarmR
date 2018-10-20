@@ -1,5 +1,6 @@
 import os
 import csv
+import math
 
 import bpy
 from bpy_extras.io_utils import ExportHelper
@@ -56,6 +57,16 @@ def unregister():
     bpy.types.INFO_MT_file_export.remove(menu_func)
 
 
+def calc_speed(start_point, end_point):
+    time_delta = 0.1
+    distance = math.sqrt(
+        (start_point[0] - end_point[0]) ** 2 +
+        (start_point[1] - end_point[1]) ** 2 +
+        (start_point[2] - end_point[2]) ** 2
+    )
+    return distance / time_delta
+
+
 def save_chan(context, folder_path):
     scene = context.scene
     objects = []
@@ -78,25 +89,35 @@ def save_chan(context, folder_path):
                 quoting=csv.QUOTE_MINIMAL
             )
 
+            prev_x, prev_y, prev_z = 0, 0, 0
             for frame in range(frame_start, frame_end + 1, 1):
                 row = [
                     str(frame),
                 ]
-                materials = obj.data.materials
-                for material in materials:
-                    scene.frame_set(frame)
-                    mat = obj.matrix_world.copy()
-                    t = mat.to_translation()
-                    x, y, z = t[:]
-                    row += [x, y, z]
-                    rgb = []
-                    for u in range(3):
-                        rgb.append(
-                            int(material.diffuse_color[u] * 255)
-                        )
-                    row += rgb
+                if len(obj.data.materials) == 1:
+                    material = obj.data.materials[0]
+                else:
+                    material = obj.data.materials[0]
+                print(dir(material))
+                scene.frame_set(frame)
+                mat = obj.matrix_world.copy()
+                t = mat.to_translation()
+                x, y, z = t[:]
+                row += [x, y, z]
+                speed = calc_speed(
+                    (x, y, z),
+                    (prev_x, prev_y, prev_z)
+                ) if frame != frame_start else 1
+                prev_x, prev_y, prev_z = x, y, z
+                row.append(speed)
+                rgb = []
+                for u in range(3):
+                    rgb.append(
+                        int(material.diffuse_color[u] * 255)
+                    )
+                row += rgb
                 animation_file_writer.writerow(row)
-            drone_number += 1
+        drone_number += 1
     return {'FINISHED'}
 
 
