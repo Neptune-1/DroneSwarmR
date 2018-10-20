@@ -18,12 +18,6 @@ class Client(object):
         self.frames = []
         self.animation_file_path = Config.animation_file_path
         self.read_animation_file()
-        self.server_polling_thread = ServerPollingThread(
-            'server_polling', self.socket, self.state_machine
-        )
-        self.animation_thread = FlyingThread(
-            'animation', self.socket, self.state_machine, self.frames
-        )
 
     def read_animation_file(self):
         with open(self.animation_file_path) as animation_file:
@@ -46,5 +40,11 @@ class Client(object):
     def run(self):
         self.socket.connect((self.host, self.port))
         self.socket.send(str(self.copter_id).encode('utf-8'))
-        self.server_polling_thread.start()
-        self.animation_thread.start()
+        server_polling_thread = ServerPollingThread(
+            'server_polling', self.socket, self.state_machine
+        )
+        animation_thread = FlyingThread(
+            'animation', self.socket, self.state_machine, self.frames
+        )
+        server_polling_thread.start()
+        animation_thread.start()
