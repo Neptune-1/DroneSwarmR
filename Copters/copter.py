@@ -13,6 +13,9 @@ def programm():
     FlightLib.land()
 
 
+def programm_read():
+    pass
+
 if __name__ == "__main__":
 
     client = Client(copter_id)
