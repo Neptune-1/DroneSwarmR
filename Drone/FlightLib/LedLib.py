@@ -148,7 +148,7 @@ def strip_wipe(color, direction):
         strip.show()
 
 
-def strip_fade(r1, g1, b1, r2, g2, b2, frames=51):
+def strip_fade(r1, g1, b1, r2, g2, b2, frames=50):
     r_delta = (r2-r1)//frames
     g_delta = (g2-g1)//frames
     b_delta = (b2-b1)//frames
