@@ -4,6 +4,7 @@ import socket
 
 class Client(object):
 
+
     def __init__(self, copter_id, HOST='localhost', PORT=8002):
         self.PORT = PORT
         self.HOST = HOST
@@ -20,5 +21,6 @@ class Client(object):
         data = self.sock.recv(1024).decode('utf-8')
         return data
 
+
     def send(self, data):
-        sel
+        self.sock.send(data.encode('utf-8'))

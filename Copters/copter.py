@@ -2,7 +2,9 @@ from Client import Client
 from FlightLib import FlightLib
 import time
 
-copter_id = 1
+# get self id
+with open('id.txt') as file:
+    copter_id = int(file.readline())
 
 
 def programm():
@@ -20,10 +22,10 @@ if __name__ == "__main__":
 
     while True:
         data = client.recv()
-        if(data == b'start'):
+        if (data == b'start'):
             programm()
-            client.
+            client.send('THE END!')
             break
         time.sleep(0.001)
-        if(time.time() - start_wait_time > 10):
+        if (time.time() - start_wait_time > 10):
             break
