@@ -11,8 +11,6 @@ mocap = 0
 origin = 0
 
 
-
-
 def waitInterface():
     global x, y, l, first, side, sep, mocap, origin, fp
 

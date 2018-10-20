@@ -1,5 +1,5 @@
 from Client import Client
-from FlightLib import FlightLib
+from Drone.FlightLib import FlightLib
 import time
 
 # get self id
@@ -14,7 +14,6 @@ def programm():
 
 
 if __name__ == "__main__":
-
     client = Client(copter_id)
     client.connect()
 
