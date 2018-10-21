@@ -24,8 +24,8 @@ class FlyingThread(Threadable):
             self,
             name,
             socket,
-            state_machine: StateMachine,
-            frames: list
+            state_machine,
+            frames
     ):
         super().__init__(name, socket)
         self.current_frame_number = 0
