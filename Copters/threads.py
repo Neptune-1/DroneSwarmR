@@ -1,7 +1,7 @@
-from ..Drone.FlightLib import FlightLib
+from LightmusicClient.FlightLib import FlightLib, LedLib
+
 FlightLib.init('unique string')
-from ..Drone.FlightLib import LedLib
-from .StateMachine import StateMachine
+from StateMachine import StateMachine
 
 import time
 from threading import Thread

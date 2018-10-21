@@ -1,6 +1,6 @@
 from tkinter import Tk, Label, Button
 
-from .Server import Server
+from Server import Server
 
 
 class ServerGUI:

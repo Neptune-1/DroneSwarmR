@@ -1,8 +1,8 @@
 import socket
 import csv
 
-from .StateMachine import StateMachine
-from .threads import ServerPollingThread, FlyingThread
+from StateMachine import StateMachine
+from threads import ServerPollingThread, FlyingThread
 
 
 class Config:
