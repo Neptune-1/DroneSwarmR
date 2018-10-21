@@ -6,29 +6,28 @@ FlightLib.init('SingleCleverFlight')
 from FlightLib import LedLib
 
 
-animation_file_path = 'drone1.csv'
+animation_file_path = 'animation.csv'
 frames = []
-current_frame_number = 1
 
 
 def takeoff():
     FlightLib.takeoff()
-    LedLib.rainbow()
+    LedLib.wipe_to(0, 255, 0)
 
 
 def land():
+    LedLib.rainbow()
     FlightLib.land()
     LedLib.off()
 
 
-def do_next_animation():
-    current_frame = frames[current_frame_number]
+def do_next_animation(current_frame):
     FlightLib.navto(
-        current_frame['x'], current_frame['y'], current_frame['z'],
-        current_frame['yaw'], speed=current_frame['speed']
+        round(float(current_frame['x']), 4), round(float(current_frame['y']), 4), round(float(current_frame['z']), 4),
+        round(float(current_frame['yaw']), 4), speed=2
     )
-    LedLib.fade_to(
-        current_frame['r'], current_frame['g'], current_frame['b']
+    LedLib.fill(
+        int(current_frame['green']), int(current_frame['red']), int(current_frame['blue'])
     )
 
 
@@ -56,7 +55,7 @@ if __name__ == '__main__':
     read_animation_file()
     takeoff()
     for frame in frames:
-        do_next_animation()
+        do_next_animation(frame)
         time.sleep(0.1)
-        current_frame_number += 1
     land()
+    time.sleep(3)
