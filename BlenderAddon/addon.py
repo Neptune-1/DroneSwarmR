@@ -108,6 +108,10 @@ def save_chan(context, folder_path):
                     (x, y, z),
                     (prev_x, prev_y, prev_z)
                 ) if frame != frame_start else 1
+                if speed > 3:
+                    bpy.context.window_manager.popup_menu(
+                        oops, title="Error", icon='ERROR'
+                    )
                 prev_x, prev_y, prev_z = x, y, z
                 row.append(speed)
                 rgb = []
@@ -120,6 +124,10 @@ def save_chan(context, folder_path):
                 animation_file_writer.writerow(row)
         drone_number += 1
     return {'FINISHED'}
+
+
+def oops(self, context):
+    self.layout.label("Speed is greater than 3 m/s")
 
 
 if __name__ == "__main__":
