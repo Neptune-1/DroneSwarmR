@@ -70,7 +70,7 @@ class FlyingThread(Threadable):
 
 
 class ServerPollingThread(Threadable):
-    def __init__(self, name, socket, state_machine: StateMachine):
+    def __init__(self, name, socket, state_machine):
         super().__init__(name, socket)
         self.paused = False
         self.state_machine = state_machine
