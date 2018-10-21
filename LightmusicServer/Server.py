@@ -15,18 +15,13 @@ rootLogger.addHandler(ch)
 
 
 class Server(object):
-    def __init__(self, host='localhost', port=8002):
+    def __init__(self, host='localhost', port=9000):
         self.host = host
         self.port = port
         self.sock = socket.socket()
-        self.sock.bind((self.host, self.port))
+        self.sock.bind((host, port))
         self.sock.listen(2)
         self.copters = [None, None]
-
-    def run(self):
-        pass
-        #self.accept()
-        #self.takeoff()
 
     def accept(self):
         while None in self.copters:
@@ -40,48 +35,42 @@ class Server(object):
                 rootLogger.info("Connect copter 2 successfully!")
         rootLogger.info("Connect successfully!")
 
-    def check(self):
-        result = True
-        # check copter 1
-        self.copters[0].send(b'check')
-        feedback = self.copters[0].recv(1024)
-        if feedback == b'OK!':
-            rootLogger.info('Copter 1 check successfully!')
-        else:
-            rootLogger.error('Error: Copter 1 check not successfully')
-            result = False
-
-        # check copter 2
-        self.copters[1].send(b'check')
-        feedback = self.copters[1].recv(1024)
-        if feedback == b'OK!':
-            rootLogger.info('Copter 2 check successfully!')
-        else:
-            rootLogger.error('Error: Copter 2 check not successfully')
-            result = False
-        return result
-
-    def takeoff(self):
+    def rainbow(self):
         for copter in self.copters:
-            copter.send(b'takeoff')
+            copter.send(b'rainbow')
 
-    def land(self):
+    def fill(self):
         for copter in self.copters:
-            copter.send(b'land')
+            copter.send(b'fill')
 
-    def pause(self):
+    def blink(self):
         for copter in self.copters:
-            copter.send(b'pause')
+            copter.send(b'blink')
 
-    def resume(self):
+    def chase(self):
         for copter in self.copters:
-            copter.send(b'resume')
+            copter.send(b'chase')
 
-    def start_animation(self):
+    def wipe_to(self):
         for copter in self.copters:
-            copter.send(b'start_animation')
+            copter.send(b'wipe_to')
+
+    def fade_to(self):
+        for copter in self.copters:
+            copter.send(b'fade_to')
+
+    def run(self):
+        for copter in self.copters:
+            copter.send(b'run')
+
+    def set_color(self, color=(0, 0, 0)):
+        for copter in self.copters:
+            color = ' '.join(list(map(str, color)))
+            copter.send('color ' + color)
 
     def close(self):
+        self.copters[0].send(b'close')
+        self.copters[1].send(b'close')
         self.copters[0].close()
         self.copters[1].close()
         self.sock.close()
