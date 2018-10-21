@@ -1,5 +1,5 @@
 #!/bin/bash
-export PYTHONPATH='.'
+export PYTHONPATH="$PWD"
 echo -e 'COPTER_ID: '
 read id
 echo -e 'HOST: '
