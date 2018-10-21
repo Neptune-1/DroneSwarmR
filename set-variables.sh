@@ -1,4 +1,8 @@
 #!/bin/bash
 export PYTHONPATH='.'
-read -p 'COPTER_ID: ' COPTER_ID
-read -p 'HOST: ' HOST
+echo -e 'COPTER_ID: '
+read id
+echo -e 'HOST: '
+read host
+export COPTER_ID="$id"
+export HOST="$host"
