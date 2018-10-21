@@ -151,26 +151,17 @@ class Client(object):
         self.animation_file_path = Config.animation_file_path
         self.read_animation_file()
 
-    def read_animation_file(self):
-        with open(self.animation_file_path) as animation_file:
-            csv_reader = csv.reader(
-                animation_file, delimiter=',', quotechar='|'
-            )
-            for row in csv_reader:
-                frame_number, x, y, z, speed, red, green, blue = row
-                self.frames.append({
-                    'number': frame_number,
-                    'x': x,
-                    'y': y,
-                    'z': z,
-                    'speed': speed,
-                    'red': red,
-                    'green': green,
-                    'blue': blue
-                })
+
 
     def run(self):
-        self.socket.connect((self.host, self.port))
+        connected = False
+        while not connected:
+            try:
+                self.socket.bind((self.host, self.port))
+                if self.socket.
+                connection_set = True
+            except Exception as e:
+                pass
         self.socket.listen(2)
         self.socket.send(str(self.copter_id).encode('utf-8'))
         server_polling_thread = ServerPollingThread(
