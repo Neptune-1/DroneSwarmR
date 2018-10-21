@@ -15,7 +15,7 @@ root_logger.addHandler(ch)
 
 
 class Server(object):
-    def __init__(self, host='', port=9000):
+    def __init__(self, host='', port=9005):
         self.host = host
         self.port = port
         self.sock = socket.socket()
@@ -64,10 +64,10 @@ class Server(object):
         for copter in self.copters:
             copter.send(b'run')
 
-    def set_color(self, color=(0, 0, 0)):
+    def set_color(self, color=[0, 0, 0]):
         for copter in self.copters:
-            color = ' '.join(list(map(str, color)))
-            copter.send('color ' + color)
+            color_str = ' '.join([str(s) for s in color])
+            copter.send(('color ' + color_str).encode('utf-8'))
 
     def close(self):
         self.copters[0].send(b'close')

@@ -11,7 +11,7 @@ class Config:
 
 
 class Client(object):
-    def __init__(self, host=Config.host, port=9000):
+    def __init__(self, host=Config.host, port=9001):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.port = port
         self.host = host

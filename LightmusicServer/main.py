@@ -72,7 +72,8 @@ class ServerGUI:
 
     def get_color(self):
         color = askcolor()[0]
-        color = map(int, color)
+        color = [int(s) for s in color]
+        print('Color', color)
         self.server.set_color(color)
 
     def quit(self):

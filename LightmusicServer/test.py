@@ -4,7 +4,7 @@ from tkinter.colorchooser import *
 
 def getColor():
     color = askcolor()[0]
-    print(color)
+    print([int(s) for s in color])
 
 
 def rainbow():
