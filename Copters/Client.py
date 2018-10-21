@@ -1,9 +1,9 @@
 import socket
 import csv
 
-from .config import Config
-from .StateMachine import StateMachine
-from .threads import ServerPollingThread, FlyingThread
+from Copters.config import Config
+from Copters.StateMachine import StateMachine
+from Copters.threads import ServerPollingThread, FlyingThread
 
 
 class Client(object):

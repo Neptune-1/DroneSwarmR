@@ -1,4 +1,4 @@
-from .Client import Client
+from Copters.Client import Client
 
 
 if __name__ == "__main__":

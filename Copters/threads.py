@@ -2,7 +2,7 @@ import time
 from threading import Thread
 
 from Drone.FlightLib import FlightLib, LedLib
-from .StateMachine import StateMachine
+from Copters.StateMachine import StateMachine
 
 
 class Threadable(Thread):
