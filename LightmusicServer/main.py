@@ -1,7 +1,7 @@
 from tkinter import Tk, Button, Label
 from tkinter.colorchooser import askcolor
 
-from LightmusicServer.Server import Server
+from .Server import Server
 
 
 class ServerGUI:

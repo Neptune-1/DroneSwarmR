@@ -1,7 +1,7 @@
-from Drone.FlightLib import FlightLib
+from ..Drone.FlightLib import FlightLib
 FlightLib.init('unique string')
-from Drone.FlightLib import LedLib
-from StateMachine import StateMachine
+from ..Drone.FlightLib import LedLib
+from .StateMachine import StateMachine
 
 import time
 from threading import Thread
@@ -29,7 +29,7 @@ class FlyingThread(Threadable):
             state_machine,
             frames
     ):
-        super().__init__(name, socket)
+        super(FlyingThread, self).__init__(name, socket)
         self.current_frame_number = 0
         self.state_machine = state_machine
         self.frames = frames
@@ -73,7 +73,7 @@ class FlyingThread(Threadable):
 
 class ServerPollingThread(Threadable):
     def __init__(self, name, socket, state_machine):
-        super().__init__(name, socket)
+        super(ServerPollingThread, self).__init__(name, socket)
         self.paused = False
         self.state_machine = state_machine
 

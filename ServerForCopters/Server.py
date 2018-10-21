@@ -1,4 +1,4 @@
-from logger import root_logger
+from ..logger import root_logger
 
 import socket
 
