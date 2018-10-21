@@ -2,8 +2,8 @@ import socket
 import csv
 
 from config import Config
-from Copters.StateMachine import StateMachine
-from Copters.threads import ServerPollingThread, FlyingThread
+from . import StateMachine
+from . import ServerPollingThread, FlyingThread
 
 
 class Client(object):
