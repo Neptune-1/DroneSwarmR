@@ -1,12 +1,12 @@
 import socket
 import time
 
-from .. import config
+from ..config import Config
 from ..Drone.FlightLib import LedLib
 
 
 class Client(object):
-    def __init__(self, host=config.Config.host, port=9000):
+    def __init__(self, host=Config.host, port=9000):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.port = port
         self.host = host
@@ -42,7 +42,7 @@ class Client(object):
 
     def connect(self):
         self.sock.connect((self.host, self.port))
-        self.sock.send(config.Config.copter_id)
+        self.sock.send(Config.copter_id)
 
     def close(self):
         self.sock.close()

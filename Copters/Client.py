@@ -1,22 +1,22 @@
 import socket
 import csv
 
-from .. import config
+from ..config import Config
 from .StateMachine import StateMachine
 from .threads import ServerPollingThread, FlyingThread
 
 
 class Client(object):
-    def __init__(self, host=config.Config.host, port=8002):
+    def __init__(self, host=Config.host, port=8002):
         self.state_machine = StateMachine(
             start_state=StateMachine.PAUSE_STATE
         )
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.port = port
         self.host = host
-        self.copter_id = config.Config.copter_id
+        self.copter_id = Config.copter_id
         self.frames = []
-        self.animation_file_path = config.Config.animation_file_path
+        self.animation_file_path = Config.animation_file_path
         self.read_animation_file()
 
     def read_animation_file(self):

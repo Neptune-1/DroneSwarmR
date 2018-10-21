@@ -1,6 +1,6 @@
-from ..logger import root_logger
-
 import socket
+
+from ..logger import root_logger
 
 
 class Server(object):
