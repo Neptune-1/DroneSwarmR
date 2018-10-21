@@ -1,6 +1,6 @@
-from LightmusicClient.FlightLib import FlightLib, LedLib
-
-FlightLib.init('unique string')
+from FlightLib import FlightLib
+f.init('SingleCleverFlight')
+from FlightLib import LedLib
 from StateMachine import StateMachine
 
 import time

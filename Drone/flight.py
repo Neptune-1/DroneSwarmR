@@ -1,7 +1,7 @@
 import time
-from FlightLib import FlightLib as f
+from FlightLib import FlightLib as f, LedLib as led
+
 f.init('SingleCleverFlight')
-from FlightLib import LedLib as led
 
 led.wipe_to(0, 255, 0)
 
