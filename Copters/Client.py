@@ -1,7 +1,7 @@
 import socket
 import csv
 
-from Copters.config import Config
+from config import Config
 from Copters.StateMachine import StateMachine
 from Copters.threads import ServerPollingThread, FlyingThread
 

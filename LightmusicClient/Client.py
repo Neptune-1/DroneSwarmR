@@ -1,4 +1,8 @@
 import socket
+import time
+
+from config import Config
+from Drone.FlightLib import LedLib
 
 
 class Client(object):
@@ -7,11 +11,42 @@ class Client(object):
         self.port = port
         self.host = host
 
+    def run(self):
+        red = 0
+        green = 0
+        blue = 0
+        while True:
+            data = self.fetch_data()
+            if 'color' in data:
+                data = data.split()[1:]
+                color = map(int, data)
+                red, green, blue = color
+            elif data == 'rainbow':
+                LedLib.rainbow()
+            elif data == 'fill':
+                LedLib.fill(red, green, blue)
+            elif data == 'blink':
+                LedLib.blink(red, green, blue)
+            elif data == 'chase':
+                LedLib.chase(red, green, blue)
+            elif data == 'wipe_to':
+                LedLib.wipe_to(red, green, blue)
+            elif data == 'fade_to':
+                LedLib.fade_to(red, green, blue)
+            elif data == 'run':
+                LedLib.fade_to(red, green, blue)
+            elif data == 'close':
+                LedLib.off()
+            time.sleep(0.001)
+
     def connect(self):
         self.sock.connect((self.host, self.port))
-        self.sock.send(b'1')
+        self.sock.send(Config.copter_id)
 
-    def get_data(self):
+    def close(self):
+        self.sock.close()
+
+    def fetch_data(self):
         data = self.sock.recv(1024)
         data = data.decode('utf-8')
         return data

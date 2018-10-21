@@ -1,7 +1,7 @@
-from tkinter import *
-from tkinter.colorchooser import *
+from tkinter import Tk, Button, Label
+from tkinter.colorchooser import askcolor
 
-from Server import Server
+from LightmusicServer.Server import Server
 
 
 class ServerGUI:
@@ -10,7 +10,7 @@ class ServerGUI:
     def __init__(self, master):
         self.master = master
         self.server = Server()
-        self.server.run()
+        # self.server.run()
         master.title("Server GUI")
 
         self.label = Label(master, text="Control light")
@@ -65,7 +65,7 @@ class ServerGUI:
         self.color_button.pack()
 
         self.quit_button = Button(
-            master, text="Close", width=self.BUTTON_WIDTH,
+            master, text="Close socket", width=self.BUTTON_WIDTH,
             command=self.server.close
         )
         self.quit_button.pack()

@@ -1,17 +1,6 @@
+from logger import root_logger
+
 import socket
-import logging
-import sys
-
-
-rootLogger = logging.getLogger()
-rootLogger.setLevel(logging.INFO)
-ch = logging.StreamHandler(sys.stdout)
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter(
-    '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-ch.setFormatter(formatter)
-rootLogger.addHandler(ch)
 
 
 class Server(object):
@@ -29,11 +18,11 @@ class Server(object):
             info = conn.recv(1024).decode('utf-8')
             if info == '1':
                 self.copters[0] = conn
-                rootLogger.info("Connect copter 1 successfully!")
+                root_logger.info("Connect copter 1 successfully!")
             elif info == '2':
                 self.copters[1] = conn
-                rootLogger.info("Connect copter 2 successfully!")
-        rootLogger.info("Connect successfully!")
+                root_logger.info("Connect copter 2 successfully!")
+        root_logger.info("Connect successfully!")
 
     def rainbow(self):
         for copter in self.copters:

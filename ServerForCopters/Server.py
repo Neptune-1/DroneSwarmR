@@ -1,17 +1,6 @@
+from logger import root_logger
+
 import socket
-import logging
-import sys
-
-
-rootLogger = logging.getLogger()
-rootLogger.setLevel(logging.INFO)
-ch = logging.StreamHandler(sys.stdout)
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter(
-    '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-ch.setFormatter(formatter)
-rootLogger.addHandler(ch)
 
 
 class Server(object):
@@ -24,9 +13,8 @@ class Server(object):
         self.copters = [None, None]
 
     def run(self):
-        pass
-        #self.accept()
-        #self.takeoff()
+        self.accept()
+        self.takeoff()
 
     def accept(self):
         while None in self.copters:
@@ -34,11 +22,11 @@ class Server(object):
             info = conn.recv(1024).decode('utf-8')
             if info == '1':
                 self.copters[0] = conn
-                rootLogger.info("Connect copter 1 successfully!")
+                root_logger.info("Connect copter 1 successfully!")
             elif info == '2':
                 self.copters[1] = conn
-                rootLogger.info("Connect copter 2 successfully!")
-        rootLogger.info("Connect successfully!")
+                root_logger.info("Connect copter 2 successfully!")
+        root_logger.info("Connect successfully!")
 
     def check(self):
         result = True
@@ -46,18 +34,18 @@ class Server(object):
         self.copters[0].send(b'check')
         feedback = self.copters[0].recv(1024)
         if feedback == b'OK!':
-            rootLogger.info('Copter 1 check successfully!')
+            root_logger.info('Copter 1 check successfully!')
         else:
-            rootLogger.error('Error: Copter 1 check not successfully')
+            root_logger.error('Error: Copter 1 check not successfully')
             result = False
 
         # check copter 2
         self.copters[1].send(b'check')
         feedback = self.copters[1].recv(1024)
         if feedback == b'OK!':
-            rootLogger.info('Copter 2 check successfully!')
+            root_logger.info('Copter 2 check successfully!')
         else:
-            rootLogger.error('Error: Copter 2 check not successfully')
+            root_logger.error('Error: Copter 2 check not successfully')
             result = False
         return result
 
