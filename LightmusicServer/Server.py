@@ -4,7 +4,7 @@ import socket
 
 
 class Server(object):
-    def __init__(self, host='localhost', port=9000):
+    def __init__(self, host='', port=9000):
         self.host = host
         self.port = port
         self.sock = socket.socket()
