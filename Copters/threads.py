@@ -1,7 +1,7 @@
 import time
 from threading import Thread
 
-from Drone.FlightLib import FlightLib
+from Drone.FlightLib import FlightLib, LedLib
 from .StateMachine import StateMachine
 
 
@@ -46,12 +46,14 @@ class FlyingThread(Threadable):
 
     def takeoff(self):
         FlightLib.takeoff()
+        LedLib.rainbow()
         self.state_machine.switch_state(
             new_state=StateMachine.PAUSE_STATE
         )
 
     def land(self):
         FlightLib.land()
+        LedLib.off()
         self.state_machine.switch_state(
             new_state=StateMachine.PAUSE_STATE
         )
@@ -60,6 +62,9 @@ class FlyingThread(Threadable):
         current_frame = self.frames[self.current_frame_number]
         FlightLib.reach(
             current_frame['x'], current_frame['y'], current_frame['z']
+        )
+        LedLib.fade_to(
+            current_frame['r'], current_frame['g'], current_frame['b']
         )
 
 

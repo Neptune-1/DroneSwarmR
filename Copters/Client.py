@@ -39,6 +39,7 @@ class Client(object):
 
     def run(self):
         self.socket.connect((self.host, self.port))
+        self.socket.listen(2)
         self.socket.send(str(self.copter_id).encode('utf-8'))
         server_polling_thread = ServerPollingThread(
             'server_polling', self.socket, self.state_machine
