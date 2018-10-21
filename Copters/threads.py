@@ -61,7 +61,8 @@ class FlyingThread(Threadable):
     def do_next_animation(self):
         current_frame = self.frames[self.current_frame_number]
         FlightLib.reach(
-            current_frame['x'], current_frame['y'], current_frame['z']
+            current_frame['x'], current_frame['y'], current_frame['z'],
+            speed=current_frame['speed']
         )
         LedLib.fade_to(
             current_frame['r'], current_frame['g'], current_frame['b']
