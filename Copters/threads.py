@@ -1,8 +1,10 @@
+from Drone.FlightLib import FlightLib
+FlightLib.init('unique string')
+from Drone.FlightLib import LedLib
+from Copters.StateMachine import StateMachine
+
 import time
 from threading import Thread
-
-from Drone.FlightLib import FlightLib, LedLib
-from Copters.StateMachine import StateMachine
 
 
 class Threadable(Thread):
