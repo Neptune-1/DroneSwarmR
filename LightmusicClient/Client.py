@@ -6,12 +6,13 @@ from Drone.FlightLib import LedLib
 
 
 class Client(object):
-    def __init__(self, host='localhost', port=9000):
+    def __init__(self, host=Config.host, port=9000):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.port = port
         self.host = host
 
     def run(self):
+        self.connect()
         red = 0
         green = 0
         blue = 0
