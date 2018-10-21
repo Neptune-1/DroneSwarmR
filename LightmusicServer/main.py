@@ -10,7 +10,7 @@ class ServerGUI:
     def __init__(self, master):
         self.master = master
         self.server = Server()
-        # self.server.run()
+        self.server.run()
         master.title("Server GUI")
 
         self.label = Label(master, text="Control light")

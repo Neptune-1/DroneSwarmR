@@ -11,6 +11,7 @@ class Server(object):
         self.sock.bind((host, port))
         self.sock.listen(2)
         self.copters = [None, None]
+        self.accept()
 
     def accept(self):
         while None in self.copters:
