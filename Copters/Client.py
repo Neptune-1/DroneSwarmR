@@ -2,8 +2,8 @@ import socket
 import csv
 
 from config import Config
-from . import StateMachine
-from . import ServerPollingThread, FlyingThread
+from StateMachine import StateMachine
+from threads import ServerPollingThread, FlyingThread
 
 
 class Client(object):
