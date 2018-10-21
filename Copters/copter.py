@@ -157,7 +157,7 @@ class Client(object):
                 animation_file, delimiter=',', quotechar='|'
             )
             for row in csv_reader:
-                frame_number, x, y, z, speed, red, green, blue = row
+                frame_number, x, y, z, speed, red, green, blue, yaw = row
                 self.frames.append({
                     'number': frame_number,
                     'x': x,
@@ -166,11 +166,12 @@ class Client(object):
                     'speed': speed,
                     'red': red,
                     'green': green,
-                    'blue': blue
+                    'blue': blue,
+                    'yaw': yaw
                 })
 
     def run(self):
-        self.socket.connect((self.host, self.port))
+        self.socket.bind((self.host, self.port))
         self.socket.listen(2)
         self.socket.send(str(self.copter_id).encode('utf-8'))
         server_polling_thread = ServerPollingThread(
