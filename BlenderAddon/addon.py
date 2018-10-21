@@ -99,7 +99,6 @@ def save_chan(context, folder_path):
                 else:
                     # TODO: choose material by name
                     material = obj.data.materials[0]
-                print(dir(material))
                 scene.frame_set(frame)
                 mat = obj.matrix_world.copy()
                 t = mat.to_translation()
@@ -117,6 +116,7 @@ def save_chan(context, folder_path):
                         int(material.diffuse_color[u] * 255)
                     )
                 row += rgb
+                row.append(str(obj.rotation_euler.z))
                 animation_file_writer.writerow(row)
         drone_number += 1
     return {'FINISHED'}
