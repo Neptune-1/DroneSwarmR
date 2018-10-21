@@ -7,7 +7,7 @@ from Copters.threads import ServerPollingThread, FlyingThread
 
 
 class Client(object):
-    def __init__(self, host='localhost', port=8002):
+    def __init__(self, host=Config.host, port=8002):
         self.state_machine = StateMachine(
             start_state=StateMachine.PAUSE_STATE
         )
