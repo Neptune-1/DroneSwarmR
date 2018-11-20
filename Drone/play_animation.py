@@ -1,6 +1,6 @@
 import time
 import csv
-
+import ntplib
 from FlightLib import FlightLib
 FlightLib.init('SingleCleverFlight')
 from FlightLib import LedLib
@@ -9,6 +9,12 @@ from FlightLib import LedLib
 animation_file_path = 'animation.csv'
 frames = []
 
+def time_synch()
+    c = ntplib.NTPClient()
+    response = c.request('ntp1.stratum2.ru')
+    return response.tx_time
+
+time0=time_synch()
 
 def takeoff():
     FlightLib.takeoff()
